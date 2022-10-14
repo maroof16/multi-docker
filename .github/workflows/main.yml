@@ -25,7 +25,6 @@ jobs:
     - name: script
       run: |
         docker run -e CI=true maroofshaikh09/multi-client npm test
-        docker run -e CI=true maroofshaikh09/multi-nginx npm test
         docker run -e CI=true maroofshaikh09/multi-server npm test
         docker run -e CI=true maroofshaikh09/multi-worker npm test
     - name: after install

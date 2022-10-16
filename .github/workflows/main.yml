@@ -22,9 +22,9 @@ jobs:
         docker build -t maroofshaikh09/multi-worker-10-14 -f ./worker/Dockerfile.dev ./worker
     - name: script
       run: |
-        docker run -e CI=true maroofshaikh09/multi-client npm test
-        docker run -e CI=true maroofshaikh09/multi-server npm test
-        docker run -e CI=true maroofshaikh09/multi-worker npm test
+        docker run -e CI=true maroofshaikh09/multi-client-10-14 npm test
+        docker run -e CI=true maroofshaikh09/multi-server-10-14 npm test
+        docker run -e CI=true maroofshaikh09/multi-worker-10-14 npm test
     - name: after install
       run: |
         docker push maroofshaikh09/multi-client-10-14 

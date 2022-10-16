@@ -18,10 +18,10 @@ jobs:
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: before install
       run: |
-        docker build -t maroofshaikh09/multi-client -f ./client/Dockerfile.dev ./client
-        docker build -t maroofshaikh09/multi-nginx -f ./nginx/Dockerfile.dev ./nginx
-        docker build -t maroofshaikh09/multi-server -f ./server/Dockerfile.dev ./server
-        docker build -t maroofshaikh09/multi-worker -f ./worker/Dockerfile.dev ./worker
+        docker build -t maroofshaikh09/multi-client-10-14  ./client
+        docker build -t maroofshaikh09/multi-nginx-10-14  ./nginx
+        docker build -t maroofshaikh09/multi-server-10-14 ./server
+        docker build -t maroofshaikh09/multi-worker-10-14 ./worker
     - name: script
       run: |
         docker run -e CI=true maroofshaikh09/multi-client npm test
@@ -29,8 +29,8 @@ jobs:
         docker run -e CI=true maroofshaikh09/multi-worker npm test
     - name: after install
       run: |
-        docker push maroofshaikh09/multi-client 
-        docker push maroofshaikh09/multi-nginx
-        docker push maroofshaikh09/multi-server
-        docker push maroofshaikh09/multi-worker
+        docker push maroofshaikh09/multi-client-10-14
+        docker push maroofshaikh09/multi-nginx-10-14
+        docker push maroofshaikh09/multi-server-10-14
+        docker push maroofshaikh09/multi-worker-10-14
  

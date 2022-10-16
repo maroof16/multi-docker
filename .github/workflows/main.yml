@@ -1,0 +1,34 @@
+name: multi-docker
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}   
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - name: before install
+      run: |
+        docker build -t maroofshaikh09/multi-client-10-14 -f ./client/Dockerfile.dev ./client
+        docker build -t maroofshaikh09/multi-nginx-10-14 -f ./nginx/Dockerfile.dev ./nginx
+        docker build -t maroofshaikh09/multi-server-10-14 -f ./server/Dockerfile.dev ./server
+        docker build -t maroofshaikh09/multi-worker-10-14 -f ./worker/Dockerfile.dev ./worker
+    - name: script
+      run: |
+        docker run -e CI=true maroofshaikh09/multi-client-10-14 npm test
+        docker run -e CI=true maroofshaikh09/multi-server-10-14 npm test
+        docker run -e CI=true maroofshaikh09/multi-worker-10-14 npm test
+    - name: after install
+      run: |
+        docker push maroofshaikh09/multi-client-10-14 
+        docker push maroofshaikh09/multi-nginx-10-14
+        docker push maroofshaikh09/multi-server-10-14
+        docker push maroofshaikh09/multi-worker-10-14
+ 

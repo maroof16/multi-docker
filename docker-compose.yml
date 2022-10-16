@@ -24,7 +24,7 @@ services:
           - REDIS_HOST= multi-docker-redis.4g3mnx.ng.0001.use1.cache.amazonaws.com:6379
           - REDIS_PORT= 6379
     nginx:
-        image: "maroofshaikh09/multi-nginx-10-14",
+        image: "maroofshaikh09/multi-nginx-10-14"
         hostname: nginx
         mem_limit: 128m
         ports:

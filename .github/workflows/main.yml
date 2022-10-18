@@ -31,6 +31,10 @@ jobs:
         docker push maroofshaikh09/multi-nginx-10-14
         docker push maroofshaikh09/multi-server-10-14
         docker push maroofshaikh09/multi-worker-10-14
+      
+    
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
  
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v18
